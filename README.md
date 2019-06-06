@@ -22,14 +22,14 @@ go build
 ```
  Usage of ./kaniko-image:
 ```
-    -c string
+    -c  string
     	(optional) absolute path to the kubeconfig file (default "/root/.kube/config")
    -n string
      	namespace (default "default")
    -p string
-    	your projrct name
+    	projrct name
   -r string
-    	your registry name
+    	 registry name
   -repo string
     	provide a repo of your project
 ```

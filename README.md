@@ -33,3 +33,8 @@ go build
    -repo string
     	provide a repo of your project
 ```
+
+### Example
+```
+kaniko-image -n kaniko -p spin-kub-demo -repo https://github.com/cuishuaigit/spin-kub-demo.git -r fastop/kaniko-demo:coding
+```

@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"path/filepath"
+	"strings"
 
 	appsv1 "k8s.io/api/apps/v1"
 	apiv1 "k8s.io/api/core/v1"
@@ -20,6 +21,7 @@ var (
 	repo       string
 	project    string
 	registry   string
+	seq         []string
 )
 
 func main() {
@@ -49,9 +51,10 @@ func main() {
 }
 
 func int32Ptr(i int32) *int32 { return &i }
-
 // CreateDeployment
 func createDeployment(deploymentClient v1.DeploymentInterface) {
+	canSplit := func(s rune) bool { return s == '/' }
+	seq := strings.FieldsFunc(registry, canSplit)
 	deployment := &appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      project,
@@ -91,7 +94,7 @@ func createDeployment(deploymentClient v1.DeploymentInterface) {
 							Name:            "kaniko",
 							Image:           "gcr.io/kaniko-project/executor:debug",
 							ImagePullPolicy: apiv1.PullPolicy(apiv1.PullIfNotPresent),
-							Args:            []string{"--dockerfile=/workspace/" + project + "/Dockerfile", "--context=dir://workspace/" + project, "--destination=" + registry, "--cache=true", "--cleanup"},
+							Args:            []string{"--dockerfile=/workspace/" + project + "/Dockerfile", "--context=dir://workspace/" + project, "--destination=" + registry,"--cache=true","--cache-repo="+seq[0]+"/cache","--cleanup"},
 							VolumeMounts: []apiv1.VolumeMount{
 								{
 									Name:      "workdir",

@@ -9,7 +9,7 @@ you can execute docker login then you can get a config.json in HOME/.docker
 ```bash
 kubectl create namespace kaniko
 
-kubectl create secret generic kaniko-secret --from-file==/root/.docker/config.json  -n kaniko
+kubectl create secret generic kaniko-secret --from-file=/root/.docker/config.json  -n kaniko
 
 kubectl label node  $NODENAME  kaniko=enabled
 

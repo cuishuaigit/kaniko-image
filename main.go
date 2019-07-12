@@ -69,7 +69,7 @@ func main() {
 			Containers: []apiv1.Container{
 				{
 					Name:            "kaniko",
-					Image:           "gcr.io/kaniko-project/executor:debug",
+					Image:           "gcr.io/kaniko-project/executor:latest",
 					ImagePullPolicy: apiv1.PullPolicy(apiv1.PullIfNotPresent),
 					Args:            []string{"--dockerfile=/workspace/" + project + "/Dockerfile", "--context=dir://workspace/" + project, "--destination=" + registry, "--cache=true", "--cache-repo=" + seq[0] + "/cache", "--cleanup"},
 					VolumeMounts: []apiv1.VolumeMount{

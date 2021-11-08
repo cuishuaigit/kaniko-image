@@ -16,7 +16,7 @@ kubectl label node  $NODENAME  kaniko=enabled
 kubectl taint node $NODENAME  kaniko=enabled:NoSchedule
 ```
 ## Usage
-git pull your own repo, you must build a git image with ssh private key.and replace the default image alpine/git in the  source code.
+git pull your own repo, you must build a  image with ssh private key.and replace the default image alpine/git in the  source code.
 
 ```bash
 go build 
